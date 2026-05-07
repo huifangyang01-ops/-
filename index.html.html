@@ -1,0 +1,1164 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>母婴产品 App - 场景化设备页原型</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --surface: #fffdfa;
+      --ink: #243034;
+      --muted: #6d7b80;
+      --line: #e7ded2;
+      --mint: #8fcbb7;
+      --mint-dark: #2e7a68;
+      --rose: #eea3a2;
+      --butter: #f1cc70;
+      --sky: #8db8d7;
+      --lav: #b5a2d9;
+      --alert: #d86153;
+      --shadow: 0 18px 38px rgba(62, 52, 44, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(140deg, rgba(143, 203, 183, 0.22), transparent 34%),
+        linear-gradient(320deg, rgba(238, 163, 162, 0.18), transparent 40%),
+        var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 28px 16px;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .phone {
+      width: min(430px, 100%);
+      min-height: 920px;
+      background: var(--surface);
+      border: 1px solid rgba(36, 48, 52, 0.08);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .status-bar {
+      height: 34px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      padding: 0 28px 7px;
+      font-size: 12px;
+      font-weight: 800;
+      color: rgba(36, 48, 52, 0.8);
+    }
+
+    .app {
+      padding: 14px 20px 96px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    h1 {
+      margin: 4px 0 0;
+      font-size: 27px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      box-shadow: 0 6px 16px rgba(36, 48, 52, 0.06);
+    }
+
+    .hero {
+      background: #eaf6f1;
+      border-radius: 22px;
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+      min-height: 164px;
+      margin-bottom: 16px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -36px;
+      bottom: -46px;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .hero-top,
+    .hero h2,
+    .hero p,
+    .crib-visual {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .baby-chip,
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      white-space: nowrap;
+      font-weight: 850;
+    }
+
+    .baby-chip {
+      gap: 8px;
+      color: var(--mint-dark);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(46, 122, 104, 0.14);
+      padding: 7px 10px;
+      font-size: 13px;
+    }
+
+    .pill {
+      min-height: 24px;
+      padding: 4px 8px;
+      font-size: 12px;
+      background: #f5f1ea;
+      color: var(--muted);
+    }
+
+    .pill.live {
+      background: rgba(46, 122, 104, 0.1);
+      color: var(--mint-dark);
+    }
+
+    .pill.warn {
+      background: rgba(216, 97, 83, 0.1);
+      color: var(--alert);
+    }
+
+    .hero h2 {
+      margin: 18px 0 8px;
+      font-size: 23px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 235px;
+    }
+
+    .crib-visual {
+      position: absolute;
+      right: 11px;
+      bottom: 8px;
+      width: 126px;
+      height: 112px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 10px;
+      background: #fff;
+      min-height: 78px;
+    }
+
+    .metric b {
+      display: block;
+      font-size: 19px;
+      line-height: 1.1;
+      margin-bottom: 7px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 20px 0 12px;
+    }
+
+    .section-head h3 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .text-link {
+      border: 0;
+      background: transparent;
+      color: var(--mint-dark);
+      font-size: 13px;
+      font-weight: 850;
+      padding: 6px 0;
+    }
+
+    .care-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .care-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: #fff;
+      padding: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .care-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto auto;
+      width: 116px;
+      height: 116px;
+      border-radius: 0 0 0 100%;
+      background: var(--tone);
+      opacity: 0.14;
+    }
+
+    .care-main {
+      display: grid;
+      grid-template-columns: 50px 1fr auto;
+      align-items: start;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .device-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: color-mix(in srgb, var(--tone), white 72%);
+      color: color-mix(in srgb, var(--tone), black 42%);
+    }
+
+    .care-copy b {
+      display: block;
+      font-size: 17px;
+      line-height: 1.25;
+      margin-bottom: 5px;
+    }
+
+    .care-copy span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .care-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 0 62px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .soft-action {
+      border: 1px solid color-mix(in srgb, var(--tone), white 58%);
+      background: color-mix(in srgb, var(--tone), white 84%);
+      color: color-mix(in srgb, var(--tone), black 48%);
+      border-radius: 999px;
+      min-height: 30px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .gentle-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .helper {
+      min-height: 82px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      display: grid;
+      justify-items: center;
+      align-content: center;
+      gap: 7px;
+      padding: 8px 5px;
+      color: var(--ink);
+    }
+
+    .helper .device-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+    }
+
+    .helper span {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.1;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .moment-note {
+      border-radius: 18px;
+      background: #fff8eb;
+      border: 1px solid #efdcb8;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .moment-note .device-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+    }
+
+    .moment-note b {
+      display: block;
+      font-size: 14px;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+
+    .moment-note span {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .care-card {
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .care-card:focus-visible,
+    .helper:focus-visible,
+    .soft-action:focus-visible,
+    .text-link:focus-visible,
+    .icon-btn:focus-visible {
+      outline: 3px solid rgba(46, 122, 104, 0.24);
+      outline-offset: 2px;
+    }
+
+    .care-card.expanded {
+      border-color: color-mix(in srgb, var(--tone), white 36%);
+      box-shadow: 0 12px 26px rgba(62, 52, 44, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .care-detail {
+      display: none;
+      margin: 14px 0 0 62px;
+      padding-top: 12px;
+      border-top: 1px dashed color-mix(in srgb, var(--tone), white 54%);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      position: relative;
+      z-index: 1;
+    }
+
+    .care-card.expanded .care-detail {
+      display: grid;
+      gap: 8px;
+    }
+
+    .care-detail b {
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .mini-timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+
+    .mini-timeline span {
+      min-height: 46px;
+      border-radius: 12px;
+      background: #f8f4ed;
+      padding: 8px;
+      color: var(--muted);
+    }
+
+    .helper.active {
+      border-color: color-mix(in srgb, var(--tone), white 30%);
+      box-shadow: 0 9px 18px rgba(62, 52, 44, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .toast {
+      position: absolute;
+      left: 50%;
+      bottom: 92px;
+      transform: translate(-50%, 18px);
+      min-width: 210px;
+      max-width: calc(100% - 40px);
+      border-radius: 999px;
+      background: rgba(36, 48, 52, 0.92);
+      color: #fff;
+      padding: 11px 15px;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.35;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+      z-index: 5;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .sheet-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(36, 48, 52, 0.28);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease;
+      z-index: 8;
+    }
+
+    .sheet-backdrop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sheet {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fffdfa;
+      border-radius: 26px 26px 0 0;
+      border-top: 1px solid var(--line);
+      padding: 12px 20px 24px;
+      transform: translateY(105%);
+      transition: transform 220ms ease;
+      z-index: 9;
+      box-shadow: 0 -18px 34px rgba(62, 52, 44, 0.16);
+    }
+
+    .sheet.show {
+      transform: translateY(0);
+    }
+
+    .sheet-grip {
+      width: 42px;
+      height: 4px;
+      border-radius: 99px;
+      background: #d7cec3;
+      margin: 0 auto 16px;
+    }
+
+    .sheet-head {
+      display: grid;
+      grid-template-columns: 50px 1fr auto;
+      align-items: start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .sheet-title b {
+      display: block;
+      font-size: 19px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .sheet-title span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .sheet-close {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: #fff;
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .sheet-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .sheet-stat {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 8px;
+      min-height: 70px;
+      background: #fff;
+    }
+
+    .sheet-stat b {
+      display: block;
+      font-size: 16px;
+      line-height: 1.15;
+      margin-bottom: 5px;
+    }
+
+    .sheet-stat span,
+    .sheet-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .sheet-note {
+      border-radius: 16px;
+      background: #f8f4ed;
+      padding: 12px;
+    }
+
+    nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 78px;
+      background: rgba(255, 253, 250, 0.92);
+      backdrop-filter: blur(18px);
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 9px 14px 12px;
+    }
+
+    .nav-item {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 850;
+      display: grid;
+      justify-items: center;
+      align-content: center;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .nav-item.active {
+      color: var(--mint-dark);
+    }
+
+    svg {
+      display: block;
+    }
+
+    @media (max-width: 380px) {
+      body {
+        padding: 0;
+      }
+
+      .phone {
+        min-height: 100vh;
+        border-radius: 0;
+      }
+
+      .app {
+        padding-inline: 16px;
+      }
+
+      .care-main {
+        grid-template-columns: 46px 1fr;
+      }
+
+      .care-main .pill {
+        grid-column: 2;
+        justify-self: start;
+      }
+
+      .care-actions {
+        margin-left: 58px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="phone" aria-label="母婴产品 App 场景化设备页原型">
+    <div class="status-bar">
+      <span>9:41</span>
+      <span>5G  82%</span>
+    </div>
+
+    <section class="app">
+      <header>
+        <div>
+          <div class="eyebrow">小糯米 8个月 · 今天 21:12</div>
+          <h1>照护</h1>
+        </div>
+        <button class="icon-btn" aria-label="照护设置">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 8v4l3 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2.2"/>
+          </svg>
+        </button>
+      </header>
+
+      <article class="hero">
+        <div class="hero-top">
+          <span class="baby-chip">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 12a5 5 0 0 1 10 0v2.5a5 5 0 0 1-10 0V12Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M9 9c1.5-2 4.5-2 6 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            宝宝安静中
+          </span>
+          <span class="pill live">节奏正好</span>
+        </div>
+        <h2>小糯米快要睡着了</h2>
+        <p>看护画面安静，奶温正好，体温也稳定。今晚可以把节奏放慢一点。</p>
+        <svg class="crib-visual" viewBox="0 0 140 120" fill="none" aria-hidden="true">
+          <rect x="18" y="46" width="100" height="40" rx="14" fill="#fff"/>
+          <path d="M26 46V31a22 22 0 0 1 22-22h40a22 22 0 0 1 22 22v15" stroke="#2e7a68" stroke-width="6" stroke-linecap="round"/>
+          <path d="M30 84v19M106 84v19M43 55v25M61 55v25M79 55v25M97 55v25" stroke="#2e7a68" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="51" cy="29" r="7" fill="#eea3a2"/>
+          <circle cx="83" cy="29" r="7" fill="#f1cc70"/>
+        </svg>
+      </article>
+
+      <div class="metrics">
+        <div class="metric">
+          <b>24.8℃</b>
+          <span>环境温度</span>
+        </div>
+        <div class="metric">
+          <b>36.6℃</b>
+          <span>体温贴</span>
+        </div>
+        <div class="metric">
+          <b>42℃</b>
+          <span>下次奶温</span>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h3>此刻可以做的事</h3>
+        <button class="text-link">换个节奏</button>
+      </div>
+
+      <div class="care-stack">
+        <article class="care-card" style="--tone: var(--mint)">
+          <div class="care-main">
+            <div class="device-icon">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <path d="M12 5h8l2 6v14a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V11l2-6Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+                <path d="M10 12h12M13 18h6M13 22h6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="care-copy">
+              <b>喝奶前，温度刚刚好</b>
+              <span>调奶器保持 42℃，已准备 180ml；如果宝宝醒来，可以直接开始。</span>
+            </div>
+            <span class="pill live">待冲奶</span>
+          </div>
+          <div class="care-actions">
+            <button class="soft-action">调整奶量</button>
+            <button class="soft-action">记录本次</button>
+          </div>
+        </article>
+
+        <article class="care-card" style="--tone: var(--sky)">
+          <div class="care-main">
+            <div class="device-icon">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect x="5" y="8" width="22" height="14" rx="5" stroke="currentColor" stroke-width="2.4"/>
+                <circle cx="16" cy="15" r="4" stroke="currentColor" stroke-width="2.4"/>
+                <path d="M12 24h8l2 4H10l2-4Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="care-copy">
+              <b>她睡得很安稳</b>
+              <span>IPC 正在轻声看护，最近 18 分钟没有哭声，也没有大幅翻身。</span>
+            </div>
+            <span class="pill live">看护中</span>
+          </div>
+          <div class="care-actions">
+            <button class="soft-action">看一眼</button>
+            <button class="soft-action">安静提醒</button>
+          </div>
+        </article>
+
+        <article class="care-card" style="--tone: var(--lav)">
+          <div class="care-main">
+            <div class="device-icon">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <path d="M5 14h22v8H5v-8Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+                <path d="M8 14V9a8 8 0 0 1 16 0v5M8 22v5M24 22v5M11 17v5M16 17v5M21 17v5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="care-copy">
+              <b>一会儿进入哄睡节奏</b>
+              <span>婴儿床将在 21:30 轻摇 15 分钟，白噪音同步调低。</span>
+            </div>
+            <span class="pill">已预约</span>
+          </div>
+          <div class="care-actions">
+            <button class="soft-action">提前开始</button>
+            <button class="soft-action">今晚跳过</button>
+          </div>
+        </article>
+
+        <article class="care-card" style="--tone: var(--butter)">
+          <div class="care-main">
+            <div class="device-icon">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <path d="M16 5v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                <path d="M11 18a6 6 0 1 0 10 0V8a5 5 0 0 0-10 0v10Z" stroke="currentColor" stroke-width="2.4"/>
+                <path d="M16 22h.01" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="care-copy">
+              <b>体温很平稳</b>
+              <span>体温贴连续同步中，最近 2 小时在 36.5℃ 到 36.8℃ 之间。</span>
+            </div>
+            <span class="pill live">正常</span>
+          </div>
+          <div class="care-actions">
+            <button class="soft-action">看曲线</button>
+            <button class="soft-action">设置提醒</button>
+          </div>
+        </article>
+
+        <article class="care-card" style="--tone: var(--rose)">
+          <div class="care-main">
+            <div class="device-icon">
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <path d="M12 24h10c3 0 5-2.2 5-5s-2-5-5-5h-2V9a4 4 0 0 0-8 0v15Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+                <path d="M8 24h4V12H8a4 4 0 0 0-4 4v4a4 4 0 0 0 4 4Z" stroke="currentColor" stroke-width="2.4"/>
+              </svg>
+            </div>
+            <div class="care-copy">
+              <b>妈妈也可以轻松一点</b>
+              <span>吸奶器正在轻柔模式，预计 4 分钟后完成本次舒缓节奏。</span>
+            </div>
+            <span class="pill live">进行中</span>
+          </div>
+          <div class="care-actions">
+            <button class="soft-action">调低力度</button>
+            <button class="soft-action">结束并记录</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="section-head">
+        <h3>小帮手</h3>
+        <button class="text-link">安心详情</button>
+      </div>
+
+      <div class="gentle-strip" aria-label="设备轻入口">
+        <button class="helper" style="--tone: var(--rose)">
+          <div class="device-icon">
+            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <path d="M12 24h10c3 0 5-2.2 5-5s-2-5-5-5h-2V9a4 4 0 0 0-8 0v15Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M8 24h4V12H8a4 4 0 0 0-4 4v4a4 4 0 0 0 4 4Z" stroke="currentColor" stroke-width="2.4"/>
+            </svg>
+          </div>
+          <span>吸奶器</span>
+        </button>
+        <button class="helper" style="--tone: var(--sky)">
+          <div class="device-icon">
+            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <rect x="5" y="8" width="22" height="14" rx="5" stroke="currentColor" stroke-width="2.4"/>
+              <circle cx="16" cy="15" r="4" stroke="currentColor" stroke-width="2.4"/>
+              <path d="M12 24h8l2 4H10l2-4Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span>IPC</span>
+        </button>
+        <button class="helper" style="--tone: var(--butter)">
+          <div class="device-icon">
+            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <path d="M16 5v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M11 18a6 6 0 1 0 10 0V8a5 5 0 0 0-10 0v10Z" stroke="currentColor" stroke-width="2.4"/>
+            </svg>
+          </div>
+          <span>体温贴</span>
+        </button>
+        <button class="helper" style="--tone: var(--mint)">
+          <div class="device-icon">
+            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <path d="M12 5h8l2 6v14a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V11l2-6Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M10 12h12M13 18h6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span>调奶器</span>
+        </button>
+        <button class="helper" style="--tone: var(--lav)">
+          <div class="device-icon">
+            <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+              <path d="M5 14h22v8H5v-8Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M8 14V9a8 8 0 0 1 16 0v5M8 22v5M24 22v5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <span>婴儿床</span>
+        </button>
+      </div>
+
+      <article class="moment-note">
+        <div class="device-icon" style="--tone: var(--butter)">
+          <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M16 5a8 8 0 0 0-8 8v3c0 5-2 6-3 8h22c-1-2-3-3-3-8v-3a8 8 0 0 0-8-8Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+            <path d="M13 26a3 3 0 0 0 6 0" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <b>下一次提醒：22:00 夜奶</b>
+          <span>会在宝宝有动静时轻提醒，不打扰安睡。</span>
+        </div>
+      </article>
+    </section>
+
+    <nav aria-label="底部导航">
+      <button class="nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        首页
+      </button>
+      <button class="nav-item active">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 8h12M6 16h12M9 5v6M15 13v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="9" cy="8" r="2" fill="currentColor"/>
+          <circle cx="15" cy="16" r="2" fill="currentColor"/>
+        </svg>
+        照护
+      </button>
+      <button class="nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 19V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v12l-3-2-3 2-3-2-3 2-2-2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M8 9h8M8 13h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        记录
+      </button>
+      <button class="nav-item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+          <path d="M5 21a7 7 0 0 1 14 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        我的
+      </button>
+    </nav>
+  </main>
+  <script>
+    const phone = document.querySelector(".phone");
+    const hero = {
+      chip: document.querySelector(".baby-chip"),
+      pill: document.querySelector(".hero-top .pill"),
+      title: document.querySelector(".hero h2"),
+      copy: document.querySelector(".hero p"),
+      metrics: Array.from(document.querySelectorAll(".metric b")),
+    };
+
+    const rhythms = [
+      {
+        chip: "宝宝安静中",
+        pill: "节奏正好",
+        title: "小糯米快要睡着了",
+        copy: "看护画面安静，奶温正好，体温也稳定。今晚可以把节奏放慢一点。",
+        metrics: ["24.8℃", "36.6℃", "42℃"],
+        toast: "已切到安睡照护节奏",
+      },
+      {
+        chip: "快到喝奶时间",
+        pill: "准备中",
+        title: "下一口奶已经备好了",
+        copy: "调奶器保持温度，IPC 会轻提醒宝宝动静，妈妈不用一直守着看。",
+        metrics: ["24.7℃", "36.7℃", "42℃"],
+        toast: "已切到夜奶准备节奏",
+      },
+      {
+        chip: "妈妈舒缓中",
+        pill: "轻柔模式",
+        title: "把一点时间留给妈妈",
+        copy: "吸奶器正在低力度运行，宝宝状态平稳，照护可以暂时交给小帮手。",
+        metrics: ["25.0℃", "36.6℃", "41℃"],
+        toast: "已切到妈妈舒缓节奏",
+      },
+    ];
+
+    const deviceInfo = {
+      "调奶器": {
+        tone: "var(--mint)",
+        title: "恒温调奶器",
+        subtitle: "下一次夜奶已经准备好",
+        stats: [["42℃", "当前奶温"], ["180ml", "建议奶量"], ["22:00", "预计提醒"]],
+        note: "如果宝宝提前醒来，可以从这里直接调整奶量或记录本次喂养。",
+      },
+      "IPC": {
+        tone: "var(--sky)",
+        title: "IPC 看护",
+        subtitle: "安静看护，不频繁打扰",
+        stats: [["18分", "无哭声"], ["0次", "大幅翻身"], ["开启", "安静提醒"]],
+        note: "点“看一眼”会进入实时画面；当前页面先以轻提醒承接，避免变成监控工具。",
+      },
+      "婴儿床": {
+        tone: "var(--lav)",
+        title: "智能婴儿床",
+        subtitle: "今晚的哄睡节奏已排好",
+        stats: [["21:30", "轻摇开始"], ["15分", "预计时长"], ["低", "白噪音"]],
+        note: "提前开始后，会把轻摇和白噪音一起调到适合入睡的状态。",
+      },
+      "体温贴": {
+        tone: "var(--butter)",
+        title: "体温贴",
+        subtitle: "体温平稳，同步正常",
+        stats: [["36.6℃", "当前体温"], ["2小时", "稳定时长"], ["5分", "同步间隔"]],
+        note: "体温异常时会直接变成关注卡片；平时只保留安心提示，减少焦虑感。",
+      },
+      "吸奶器": {
+        tone: "var(--rose)",
+        title: "智能吸奶器",
+        subtitle: "轻柔模式正在进行",
+        stats: [["12分", "已运行"], ["4分", "预计剩余"], ["低", "当前力度"]],
+        note: "结束后可以一键记录奶量和舒适度，让妈妈的状态也被照顾到。",
+      },
+      "安心": {
+        tone: "var(--mint)",
+        title: "今晚照护概览",
+        subtitle: "设备都在场景里，少一点操作感",
+        stats: [["5个", "小帮手"], ["3项", "安睡准备"], ["1次", "夜奶提醒"]],
+        note: "这里不强调设备管理，而是把设备能力组织成宝宝和妈妈此刻真正需要的照护动作。",
+      },
+    };
+
+    let rhythmIndex = 0;
+    let toastTimer;
+
+    function iconFor(name) {
+      const helper = Array.from(document.querySelectorAll(".helper")).find((item) => item.textContent.trim() === name);
+      return helper ? helper.querySelector(".device-icon").innerHTML : document.querySelector(".baby-chip svg").outerHTML;
+    }
+
+    function showToast(message) {
+      let toast = document.querySelector(".toast");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.className = "toast";
+        toast.setAttribute("role", "status");
+        phone.appendChild(toast);
+      }
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function ensureSheet() {
+      let backdrop = document.querySelector(".sheet-backdrop");
+      let sheet = document.querySelector(".sheet");
+      if (sheet) return { backdrop, sheet };
+
+      backdrop = document.createElement("div");
+      backdrop.className = "sheet-backdrop";
+      sheet = document.createElement("section");
+      sheet.className = "sheet";
+      sheet.setAttribute("aria-label", "设备详情");
+      sheet.innerHTML = `
+        <div class="sheet-grip"></div>
+        <div class="sheet-content"></div>
+      `;
+      phone.append(backdrop, sheet);
+      backdrop.addEventListener("click", closeSheet);
+      return { backdrop, sheet };
+    }
+
+    function openSheet(name) {
+      const info = deviceInfo[name] || deviceInfo["安心"];
+      const { backdrop, sheet } = ensureSheet();
+      sheet.querySelector(".sheet-content").innerHTML = `
+        <div class="sheet-head">
+          <div class="device-icon" style="--tone: ${info.tone}">${iconFor(name)}</div>
+          <div class="sheet-title">
+            <b>${info.title}</b>
+            <span>${info.subtitle}</span>
+          </div>
+          <button class="sheet-close" aria-label="关闭详情">×</button>
+        </div>
+        <div class="sheet-grid">
+          ${info.stats.map((stat) => `<div class="sheet-stat"><b>${stat[0]}</b><span>${stat[1]}</span></div>`).join("")}
+        </div>
+        <div class="sheet-note">${info.note}</div>
+      `;
+      sheet.querySelector(".sheet-close").addEventListener("click", closeSheet);
+      backdrop.classList.add("show");
+      sheet.classList.add("show");
+    }
+
+    function closeSheet() {
+      document.querySelector(".sheet-backdrop")?.classList.remove("show");
+      document.querySelector(".sheet")?.classList.remove("show");
+    }
+
+    function setRhythm(nextIndex) {
+      rhythmIndex = nextIndex % rhythms.length;
+      const next = rhythms[rhythmIndex];
+      hero.chip.lastChild.textContent = next.chip;
+      hero.pill.textContent = next.pill;
+      hero.title.textContent = next.title;
+      hero.copy.textContent = next.copy;
+      next.metrics.forEach((value, index) => {
+        hero.metrics[index].textContent = value;
+      });
+      showToast(next.toast);
+    }
+
+    const detailCopy = {
+      "喝奶前，温度刚刚好": ["调奶器", "保温中", "奶量可调", "可记一笔"],
+      "她睡得很安稳": ["IPC", "哭声检测", "翻身关注", "安静提醒"],
+      "一会儿进入哄睡节奏": ["婴儿床", "轻摇预约", "白噪音", "可提前开始"],
+      "体温很平稳": ["体温贴", "曲线稳定", "持续同步", "异常轻提醒"],
+      "妈妈也可以轻松一点": ["吸奶器", "低力度", "预计4分钟", "结束可记录"],
+    };
+
+    document.querySelectorAll(".care-card").forEach((card) => {
+      card.tabIndex = 0;
+      card.setAttribute("role", "group");
+      card.setAttribute("aria-expanded", "false");
+      card.addEventListener("click", (event) => {
+        if (event.target.closest("button")) return;
+        const title = card.querySelector(".care-copy b").textContent;
+        const detail = detailCopy[title];
+        if (!card.querySelector(".care-detail")) {
+          const panel = document.createElement("div");
+          panel.className = "care-detail";
+          panel.innerHTML = `
+            <b>${detail[0]}正在默默配合这个场景</b>
+            <div class="mini-timeline">
+              <span>${detail[1]}</span>
+              <span>${detail[2]}</span>
+              <span>${detail[3]}</span>
+            </div>
+          `;
+          card.appendChild(panel);
+        }
+        card.classList.toggle("expanded");
+        card.setAttribute("aria-expanded", card.classList.contains("expanded") ? "true" : "false");
+      });
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          card.click();
+        }
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      const target = event.target.closest("button");
+      if (!target) return;
+      const label = target.textContent.trim();
+
+      if (label === "换个节奏") {
+        setRhythm(rhythmIndex + 1);
+      } else if (label === "安心详情") {
+        openSheet("安心");
+      } else if (target.classList.contains("helper")) {
+        document.querySelectorAll(".helper").forEach((item) => item.classList.remove("active"));
+        target.classList.add("active");
+        openSheet(label);
+      } else if (target.classList.contains("soft-action")) {
+        if (label.includes("看一眼") || label.includes("安静提醒")) {
+          openSheet("IPC");
+        } else if (label.includes("奶量") || label.includes("记录本次")) {
+          openSheet("调奶器");
+        } else if (label.includes("提前开始")) {
+          target.closest(".care-card").querySelector(".pill").textContent = "已开始";
+          setRhythm(0);
+          showToast("婴儿床已进入轻柔哄睡");
+        } else if (label.includes("跳过")) {
+          target.closest(".care-card").querySelector(".pill").textContent = "今晚跳过";
+          showToast("已为今晚跳过哄睡预约");
+        } else if (label.includes("曲线") || label.includes("设置提醒")) {
+          openSheet("体温贴");
+        } else if (label.includes("力度") || label.includes("结束")) {
+          openSheet("吸奶器");
+        }
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeSheet();
+    });
+  </script>
+</body>
+</html>
