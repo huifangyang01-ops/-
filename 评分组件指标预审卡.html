@@ -713,7 +713,8 @@
     </section>
   </main>
 
-  <script>
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
     const STORAGE_KEY = 'momcozy_metric_precheck_scoring_v1';
     const metricsBody = document.getElementById('metricsBody');
     const hypothesisGrid = document.getElementById('hypothesisGrid');
@@ -851,6 +852,7 @@
 
     // 页面加载时不自动加载旧数据，避免结构不匹配导致崩溃
     // 如需加载旧数据，点击"打开上次保存的卡片"按钮
+    });
   </script>
 
 </body>
