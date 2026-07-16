@@ -191,7 +191,7 @@
     .summary-grid { grid-template-columns: 1.1fr 1fr; }
     .three-col { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .metric-stack { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .metric-stack { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
     .card {
       background: #fffaf3;
@@ -515,8 +515,8 @@
     <section>
       <div class="section-header">
         <div>
-          <h2>四、一主四辅：指标结构</h2>
-          <p class="section-note">主指标判断评分组件是否有效运行，辅助指标解释触达、打扰、反馈质量和平台复用。</p>
+          <h2>四、一主三辅：指标结构</h2>
+          <p class="section-note">主指标判断评分组件是否有效运行，辅助指标解释打扰控制、反馈质量和平台复用。</p>
         </div>
         <span class="badge">结构</span>
       </div>
@@ -528,23 +528,19 @@
       </div>
       <div class="metric-stack">
         <div class="metric-card">
-          <h3><span class="dot"></span>辅助 1：触达覆盖</h3>
-          <p>评分组件是否覆盖关键设备、页面、场景和展示形态。</p>
-        </div>
-        <div class="metric-card">
-          <h3><span class="dot sage"></span>辅助 2：打扰控制</h3>
+          <h3><span class="dot sage"></span>辅助 1：打扰控制</h3>
           <p>组件展示是否造成关闭、忽略、页面退出或重复打扰。</p>
         </div>
         <div class="metric-card">
-          <h3><span class="dot blue"></span>辅助 3：反馈质量</h3>
+          <h3><span class="dot blue"></span>辅助 2：反馈质量</h3>
           <p>评分、原因标签和上下文是否能支持问题定位。</p>
         </div>
         <div class="metric-card">
-          <h3><span class="dot gold"></span>辅助 4：平台复用</h3>
+          <h3><span class="dot gold"></span>辅助 3：平台复用</h3>
           <p>配置、组件和数据口径是否能被多设备低成本复用。</p>
         </div>
       </div>
-      <div class="table-note">结构说明：这不是四组并列 KPI。主指标回答“组件是否拿到了有效反馈”，辅助指标分别解释“覆盖是否够、打扰是否可控、反馈是否可分析、平台是否可复用”。</div>
+      <div class="table-note">结构说明：这不是三组并列 KPI。主指标回答“组件是否拿到了有效反馈”，辅助指标分别解释“打扰是否可控、反馈是否可分析、平台是否可复用”。</div>
     </section>
 
     <section>
@@ -577,23 +573,7 @@
               <td>判断用户是否愿意完成轻量评分，是组件采集能力的核心。</td>
             </tr>
             <tr>
-              <td><strong>辅助 1：触达覆盖</strong></td>
-              <td>有效曝光量</td>
-              <td>组件真实展示给用户的次数，按设备类型、评分场景、触发页面、展示形态、配置版本拆分。</td>
-              <td>首批接入设备日均有效曝光 ≥500 次（保障样本量可做统计拆分）。</td>
-              <td>上线后填写。</td>
-              <td>判断评分任务是否真正触达关键场景。</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>评分场景覆盖率</td>
-              <td>已配置并产生有效曝光的评分场景数 ÷ 本期计划接入评分场景数。</td>
-              <td>≥80%（本期计划接入评分场景的覆盖比例）。</td>
-              <td>上线后填写。</td>
-              <td>用于看 BBM、吸奶器等首批设备的接入覆盖情况。</td>
-            </tr>
-            <tr>
-              <td><strong>辅助 2：打扰控制</strong></td>
+              <td><strong>辅助 1：打扰控制</strong></td>
               <td>关闭 / 忽略率</td>
               <td>用户关闭或忽略评分组件的次数 ÷ 有效曝光次数。</td>
               <td>≤85%（与提交率互斥：提交率 + 关闭/忽略率 + 无动作率 ≈ 100%；顶部浮层 ≤90%，内嵌组件 ≤70%，需按形态拆分看，上线后校准）。</td>
@@ -609,7 +589,7 @@
               <td>判断评分组件是否破坏控制页、设置页等页面的正常任务。</td>
             </tr>
             <tr>
-              <td><strong>辅助 3：反馈质量</strong></td>
+              <td><strong>辅助 2：反馈质量</strong></td>
               <td>归因填写率</td>
               <td>填写了归因文本的提交次数 ÷ 提交成功次数。</td>
               <td>≥25%（参考经验值，上线后以真实数据校准）。</td>
@@ -625,7 +605,7 @@
               <td>用于判断低分是否集中指向连接稳定性、控制响应、状态反馈、功能查找等具体问题。</td>
             </tr>
             <tr>
-              <td><strong>辅助 4：平台复用</strong></td>
+              <td><strong>辅助 3：平台复用</strong></td>
               <td>通用能力复用率</td>
               <td>已接入评分组件能力的设备或业务数 ÷ 全部应接入评分的设备或业务数。只要接入了组件能力即计入，不要求最终发布评分任务。</td>
               <td>≥80%。</td>
@@ -676,6 +656,13 @@
           <p><strong>隐私限制：</strong>不记录 BBM 视频画面、音频内容、宝宝影像；吸奶器仅记录评分分析所需字段。</p>
         </div>
       </div>
+            <div class="card" style="margin-bottom:16px; border-color:var(--brand); background:var(--brand-soft);">
+        <span class="label">数据可用性前提（非组件指标）</span>
+        <h3>触达覆盖：数据能不能做分析的前提，不是组件质量的指标</h3>
+        <p>触达覆盖取决于业务侧配置了哪些设备、页面和场景，以及用户使用频率，不由评分组件本身的能力决定。它作为上线后数据是否可分析的前提条件监控，不纳入组件 KPI。</p>
+        <p><strong>有效曝光量：</strong>组件真实展示给用户的次数，按设备类型、评分场景、触发页面、展示形态、配置版本拆分。首批接入设备日均有效曝光 ≥500 次可保障样本量做统计拆分。</p>
+        <p><strong>评分场景覆盖率：</strong>已配置并产生有效曝光的评分场景数 ÷ 本期计划接入评分场景数。目标 ≥80%，用于看 BBM、吸奶器等首批设备的接入覆盖情况。</p>
+      </div>
       <div class="table-note">待确认项：具体事件 ID、枚举值、页面名称映射、低分阈值配置、曝光可见阈值、页面退出时间窗口、各设备首批接入场景清单。</div>
     </section>
 
@@ -694,7 +681,7 @@
         </div>
         <div class="footer-card">
           <h3>2. 再有指标口径</h3>
-          <p>用有效反馈提交率判断采集是否成立，用触达、打扰、反馈质量和复用性解释成败原因。</p>
+          <p>用有效反馈提交率判断采集是否成立，用打扰控制、反馈质量和平台复用性解释成败原因。</p>
         </div>
         <div class="footer-card">
           <h3>3. 最后上线验证</h3>
