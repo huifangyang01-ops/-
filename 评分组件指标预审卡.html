@@ -409,6 +409,29 @@
       .hero, section { padding: 24px; }
       .topbar { margin-left: -24px; margin-right: -24px; }
     }
+
+    /* === 可编辑模板样式 === */
+    .hidden { display: none !important; }
+    button, input, textarea { font: inherit; }
+    .btn-primary { background: #2f211b; color: #fff9f1; }
+    .btn-secondary { background: var(--brand-soft); color: var(--brand-dark); border: 1px solid rgba(143,95,67,.2); }
+    .btn-danger { background: var(--red-soft); color: var(--red); border: 1px solid rgba(164,92,82,.2); }
+    .start-screen { min-height: calc(100vh - 80px); display: grid; place-items: center; }
+    .start-card { width: min(820px, 100%); background: linear-gradient(135deg, #fffaf1 0%, #f4e5d9 56%, #e7eddf 100%); border: 1px solid rgba(143, 95, 67, 0.18); border-radius: 34px; padding: 44px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .start-card::after { content: ""; position: absolute; right: -78px; top: -78px; width: 260px; height: 260px; border-radius: 50%; border: 42px solid rgba(255,255,255,0.34); }
+    .start-form { margin-top: 24px; }
+    .field-label { display: block; font-size: 13px; font-weight: 800; color: var(--brand-dark); margin-bottom: 8px; }
+    .feature-input { width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; font-size: 17px; background: #fff; margin-bottom: 16px; }
+    .tip { margin-top: 18px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .row-actions { display: flex; gap: 8px; margin-top: 12px; }
+    .delete-row { background: var(--red-soft); color: var(--red); border: 1px solid rgba(164,92,82,.18); border-radius: 8px; padding: 4px 10px; font-size: 12px; cursor: pointer; white-space: nowrap; }
+    .editable { border-radius: 6px; transition: box-shadow .15s; }
+    .editable:focus { box-shadow: inset 0 0 0 2px rgba(143,95,67,.18); background: #fff; outline: none; }
+    [contenteditable="true"] { outline: none; }
+    [contenteditable="true"]:focus { background: #fff; box-shadow: inset 0 0 0 3px rgba(143,95,67,.14); }
+    .save-pulse { animation: pulse .55s ease; }
+    @keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.03)} 100%{transform:scale(1)} }
+    @media print { .topbar, .row-actions, .delete-row, .start-screen { display: none !important; } .editable { box-shadow: none !important; background: transparent !important; } }
   </style>
 </head>
 <body>
@@ -417,31 +440,34 @@
       <div class="topbar-inner">
         <div>
           <strong>指标预审卡</strong>
-          <div class="status">来源：原子化-评分组件 PRD；生成时间：2026-07-15</div>
+          <div class="status" id="saveStatus">来源：原子化-评分组件 PRD；生成时间：2026-07-15</div>
         </div>
         <div class="actions">
-          <button class="btn" type="button" onclick="window.print()">打印 / 导出 PDF</button>
+          <button class="btn btn-primary save-pulse" id="saveBtn">保存当前页面</button>
+          <button class="btn btn-secondary" id="exportBtn">导出 JSON</button>
+          <button class="btn btn-secondary" id="printBtn">打印 / 导出 PDF</button>
+          <button class="btn btn-danger" id="resetBtn">新建另一张</button>
         </div>
       </div>
     </div>
 
     <header class="hero">
       <div class="eyebrow">指标预审卡 · 评分组件</div>
-      <h1>原子化-评分组件指标预审卡</h1>
-      <p class="hero-subtitle">这张卡用于在需求评审前对齐评分组件的成功标准、验证指标、埋点前置要求和上线后判断方式，避免只完成组件上线但无法判断是否真正解决体验反馈问题。依据飞书 PRD V1.0 编写。</p>
+      <h1 id="cardTitle" class="editable" contenteditable="true" data-key="cardTitle">原子化-评分组件指标预审卡</h1>
+      <p class="hero-subtitle editable" contenteditable="true" data-key="heroSubtitle" data-placeholder="一句话说明这张卡的作用。">这张卡用于在需求评审前对齐评分组件的成功标准、验证指标、埋点前置要求和上线后判断方式，避免只完成组件上线但无法判断是否真正解决体验反馈问题。依据飞书 PRD V1.0 编写。</p>
     </header>
 
     <section>
       <div class="section-header">
         <div>
           <h2>一、总览：这张卡解决什么问题</h2>
-          <p class="section-note">评分组件不是单纯增加一个前台 UI，而是要建立“后台集中配置、前台多形态采集、数据聚合分析”的 IoT 设备软件体验评价能力。</p>
+          <p class="section-note editable" contenteditable="true" data-key="overviewNote">评分组件不是单纯增加一个前台 UI，而是要建立“后台集中配置、前台多形态采集、数据聚合分析”的 IoT 设备软件体验评价能力。</p>
         </div>
         <span class="badge">总</span>
       </div>
       <div class="summary-grid">
-        <div class="principle">核心原则：先验证能否稳定获得低打扰、可分析的体验反馈，再评估评分数据是否能帮助产品团队定位设备、场景、版本和功能问题。</div>
-        <div class="callout">
+        <div class="principle editable" contenteditable="true" data-key="corePrinciple">核心原则：先验证能否稳定获得低打扰、可分析的体验反馈，再评估评分数据是否能帮助产品团队定位设备、场景、版本和功能问题。</div>
+        <div class="callout editable" contenteditable="true" data-key="caseMeaning">
           <strong>本次指标预审重点：</strong>
           <ol>
             <li>用户是否愿意在合适场景完成轻量评分。</li>
@@ -465,18 +491,18 @@
       <div class="three-col">
         <div class="card">
           <span class="label">用户问题</span>
-          <h3>设备软件体验缺少稳定、低成本的反馈入口</h3>
-          <p>当前 IoT 软件体验反馈依赖上线前用研、客服反馈或零散问题收集，样本有限、链路分散，难以及时反映上线后真实体验，也难以按设备、场景、版本定位问题。</p>
+          <h3 class="editable" contenteditable="true" data-key="userProblemTitle">设备软件体验缺少稳定、低成本的反馈入口</h3>
+          <p><p class="editable" contenteditable="true" data-key="userProblemBody">当前 IoT 软件体验反馈依赖上线前用研、客服反馈或零散问题收集，样本有限、链路分散，难以及时反映上线后真实体验，也难以按设备、场景、版本定位问题。</p>
         </div>
         <div class="card">
           <span class="label">功能方案</span>
-          <h3>后台配置 + 前台评分组件 + 数据看板</h3>
-          <p>后台统一配置评分场景、展示形态、题型、问题文案、归因追问、频控和保护规则；前台支持底部浮层、页面底部内嵌；数据侧沉淀曝光、关闭、评分、原因、提交和拒绝原因。</p>
+          <h3 class="editable" contenteditable="true" data-key="solutionTitle">后台配置 + 前台评分组件 + 数据看板</h3>
+          <p class="editable" contenteditable="true" data-key="solutionBody">后台统一配置评分场景、展示形态、题型、问题文案、归因追问、频控和保护规则；前台支持底部浮层、页面底部内嵌；数据侧沉淀曝光、关闭、评分、原因、提交和拒绝原因。</p>
         </div>
         <div class="card">
           <span class="label">价值判断</span>
-          <h3>从零散反馈变为可复用的设备体验诊断能力</h3>
-          <p>用户可低成本表达体验，产品团队可观察满意度趋势、低分原因和版本差异，业务线接入时只需按统一规范预埋触发点并完成后台配置，多设备可复用同一套组件与数据口径。</p>
+          <h3 class="editable" contenteditable="true" data-key="valueTitle">从零散反馈变为可复用的设备体验诊断能力</h3>
+          <p class="editable" contenteditable="true" data-key="valueBody">用户可低成本表达体验，产品团队可观察满意度趋势、低分原因和版本差异，业务线接入时只需按统一规范预埋触发点并完成后台配置，多设备可复用同一套组件与数据口径。</p>
         </div>
       </div>
     </section>
@@ -489,7 +515,7 @@
         </div>
         <span class="badge">假设</span>
       </div>
-      <div class="hypothesis-grid">
+      <div id="hypothesisGrid" class="hypothesis-grid">
         <div class="cell head">规划阶段：核心假设</div>
         <div class="cell head">上线后：数据表现</div>
         <div class="cell head">结论：是否被证实</div>
@@ -522,8 +548,8 @@
       </div>
       <div class="north-star">
         <span class="label">北极星主指标</span>
-        <h3>有效反馈提交率</h3>
-        <p>衡量用户看到评分组件后，是否愿意提交一个可用于分析的评分结果，是判断组件采集能力是否成立的核心指标。</p>
+        <h3 class="editable" contenteditable="true" data-key="northStarTitle">有效反馈提交率</h3>
+        <p class="editable" contenteditable="true" data-key="northStarDesc">衡量用户看到评分组件后，是否愿意提交一个可用于分析的评分结果，是判断组件采集能力是否成立的核心指标。</p>
         <div class="formula"><strong>建议口径：</strong>提交成功且包含有效评分结果的次数 ÷ 评分组件有效曝光次数。有效曝光需排除未展示、配置失效、频控拒绝、保护规则拒绝等未真正触达用户的请求。</div>
       </div>
       <div class="metric-stack">
@@ -540,6 +566,7 @@
           <p>配置、组件和数据口径是否能被多设备低成本复用。</p>
         </div>
       </div>
+      <div class="row-actions"><button class="btn btn-secondary" id="addHypothesisBtn">+ 添加假设</button></div>
       <div class="table-note">结构说明：这不是三组并列 KPI。主指标回答“组件是否拿到了有效反馈”，辅助指标分别解释“打扰是否可控、反馈是否可分析、平台是否可复用”。</div>
     </section>
 
@@ -563,7 +590,7 @@
               <th>备注 / 判断问题</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="metricsBody">
             <tr>
               <td><strong>主指标</strong></td>
               <td>有效反馈提交率</td>
@@ -623,6 +650,7 @@
           </tbody>
         </table>
       </div>
+      <div class="row-actions"><button class="btn btn-secondary" id="addMetricBtn">+ 添加指标行</button></div>
       <div class="table-note"><strong>关键前提：</strong>所有指标都必须绑定配置版本、设备类型、设备型号、固件版本、App 版本、触发页面、评分场景、展示形态和评分题型，否则上线后无法解释数据波动。</div>
     </section>
 
@@ -663,25 +691,171 @@
       <div class="section-header">
         <div>
           <h2>七、总括：这张卡的真正作用</h2>
-          <p class="section-note">这张卡的重点不是替 PRD 写实现方案，而是在评审前沉淀“为什么做、怎么算成功、上线后如何验证”的共识。</p>
+          <p class="section-note editable" contenteditable="true" data-key="finalSummaryNote">这张卡的重点不是替 PRD 写实现方案，而是在评审前沉淀“为什么做、怎么算成功、上线后如何验证”的共识。</p>
         </div>
         <span class="badge" style="background:rgba(255,255,255,.16); color:#fff;">总括</span>
       </div>
       <div class="footer-grid">
         <div class="footer-card">
-          <h3>1. 先有采集目标</h3>
-          <p>评分组件要解决的是 IoT 设备软件体验反馈分散、样本少、不可分析的问题。</p>
+          <h3 class="editable" contenteditable="true" data-key="final1Title">1. 先有采集目标</h3>
+          <p class="editable" contenteditable="true" data-key="final1Body">评分组件要解决的是 IoT 设备软件体验反馈分散、样本少、不可分析的问题。</p>
         </div>
         <div class="footer-card">
-          <h3>2. 再有指标口径</h3>
-          <p>用有效反馈提交率判断采集是否成立，用打扰控制、反馈质量和平台复用性解释成败原因。</p>
+          <h3 class="editable" contenteditable="true" data-key="final2Title">2. 再有指标口径</h3>
+          <p class="editable" contenteditable="true" data-key="final2Body">用有效反馈提交率判断采集是否成立，用打扰控制、反馈质量和平台复用性解释成败原因。</p>
         </div>
         <div class="footer-card">
-          <h3>3. 最后上线验证</h3>
-          <p>上线后按设备、场景、题型、展示形态、版本和配置版本拆分数据，判断是否值得扩大接入。</p>
+          <h3 class="editable" contenteditable="true" data-key="final3Title">3. 最后上线验证</h3>
+          <p class="editable" contenteditable="true" data-key="final3Body">上线后按设备、场景、题型、展示形态、版本和配置版本拆分数据，判断是否值得扩大接入。</p>
         </div>
       </div>
     </section>
   </main>
+
+  <script>
+    const STORAGE_KEY = 'momcozy_metric_precheck_scoring_v1';
+    const metricsBody = document.getElementById('metricsBody');
+    const hypothesisGrid = document.getElementById('hypothesisGrid');
+    const cardTitle = document.getElementById('cardTitle');
+    const saveStatus = document.getElementById('saveStatus');
+
+    function editableHTML(key) {
+      const el = document.querySelector('[data-key="' + key + '"]');
+      return el ? el.innerHTML : '';
+    }
+    function setEditableHTML(key, value) {
+      const el = document.querySelector('[data-key="' + key + '"]');
+      if (el && value !== undefined) el.innerHTML = value;
+    }
+
+    // 给表格 td 加 contenteditable
+    document.querySelectorAll('#metricsBody td').forEach(td => {
+      td.contentEditable = 'true';
+    });
+
+    // 给假设单元格加 editable
+    document.querySelectorAll('#hypothesisGrid .cell:not(.head)').forEach(cell => {
+      cell.classList.add('editable');
+      cell.contentEditable = 'true';
+    });
+
+    function getHypotheses() {
+      const cells = [...hypothesisGrid.querySelectorAll('.cell:not(.head)')];
+      const items = [];
+      for (let i = 0; i < cells.length; i += 3) {
+        items.push({ plan: cells[i]?.innerHTML || '', data: cells[i+1]?.innerHTML || '', verdict: cells[i+2]?.innerHTML || '' });
+      }
+      return items;
+    }
+
+    function addHypothesis(item = { plan: '', data: '', verdict: '' }) {
+      ['plan', 'data', 'verdict'].forEach(type => {
+        const div = document.createElement('div');
+        div.className = 'cell ' + type + ' editable';
+        div.contentEditable = 'true';
+        div.innerHTML = item[type] || '';
+        hypothesisGrid.appendChild(div);
+      });
+    }
+
+    function addMetricRow(row = ['', '', '', '', '', '']) {
+      const tr = document.createElement('tr');
+      row.forEach((cell, idx) => {
+        const td = document.createElement('td');
+        td.contentEditable = 'true';
+        td.innerHTML = cell || '';
+        if (idx === 0) td.style.fontWeight = '800';
+        tr.appendChild(td);
+      });
+      const action = document.createElement('td');
+      action.innerHTML = '<button class="delete-row" type="button">删除</button>';
+      action.querySelector('button').addEventListener('click', () => tr.remove());
+      tr.appendChild(action);
+      metricsBody.appendChild(tr);
+    }
+
+    function getMetrics() {
+      return [...metricsBody.querySelectorAll('tr')].map(tr => [...tr.querySelectorAll('td')].slice(0, 6).map(td => td.innerHTML));
+    }
+
+    function collectData() {
+      const data = { title: cardTitle.innerHTML, savedAt: new Date().toISOString(), editables: {}, hypotheses: getHypotheses(), metrics: getMetrics() };
+      document.querySelectorAll('[data-key]').forEach(el => { data.editables[el.dataset.key] = el.innerHTML; });
+      return data;
+    }
+
+    function applyData(data) {
+      if (!data) return false;
+      cardTitle.innerHTML = data.title || '未命名功能';
+      Object.entries(data.editables || {}).forEach(([key, value]) => setEditableHTML(key, value));
+      if (data.hypotheses && data.hypotheses.length) {
+        // 保留 header 行，清掉其余
+        const heads = [...hypothesisGrid.querySelectorAll('.cell.head')];
+        hypothesisGrid.innerHTML = '';
+        heads.forEach(h => hypothesisGrid.appendChild(h));
+        data.hypotheses.forEach(addHypothesis);
+      }
+      if (data.metrics && data.metrics.length) {
+        metricsBody.innerHTML = '';
+        data.metrics.forEach(addMetricRow);
+      }
+      saveStatus.textContent = data.savedAt ? '上次保存：' + new Date(data.savedAt).toLocaleString('zh-CN') : '已加载';
+      return true;
+    }
+
+    function saveCard() {
+      const data = collectData();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      saveStatus.textContent = '已保存：' + new Date(data.savedAt).toLocaleString('zh-CN');
+      const btn = document.getElementById('saveBtn');
+      btn.classList.remove('save-pulse');
+      void btn.offsetWidth;
+      btn.classList.add('save-pulse');
+    }
+
+    function loadCard() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return false;
+      try { return applyData(JSON.parse(raw)); } catch (e) { console.error(e); return false; }
+    }
+
+    // 绑定事件
+    document.getElementById('saveBtn').addEventListener('click', saveCard);
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const data = collectData();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const safeTitle = (cardTitle.textContent || '指标预审卡').replace(/[\\/:*?"<>|\s]+/g, '_');
+      a.href = url;
+      a.download = safeTitle + '_指标预审卡.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+    document.getElementById('addHypothesisBtn').addEventListener('click', () => addHypothesis({ plan: '<p class="cell-title">新增假设</p><p></p>', data: '<p class="cell-title">上线后数据</p><p></p>', verdict: '<p class="cell-title">结论</p><p></p>' }));
+    document.getElementById('addMetricBtn').addEventListener('click', () => addMetricRow(['', '', '', '', '', '']));
+    document.getElementById('resetBtn').addEventListener('click', () => { if (confirm('确定要重置吗？当前内容如果没有保存会丢失。')) { localStorage.removeItem(STORAGE_KEY); location.reload(); } });
+
+    // 自动保存
+    let autoSaveTimer;
+    document.addEventListener('input', () => {
+      saveStatus.textContent = '有未保存修改';
+      clearTimeout(autoSaveTimer);
+      autoSaveTimer = setTimeout(saveCard, 1200);
+    });
+
+    // Cmd/Ctrl+S
+    window.addEventListener('keydown', e => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        saveCard();
+      }
+    });
+
+    // 加载已保存数据
+    loadCard();
+  </script>
+
 </body>
 </html>
