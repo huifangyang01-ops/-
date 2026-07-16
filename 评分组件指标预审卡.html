@@ -842,7 +842,7 @@
     document.addEventListener('input', () => {
       saveStatus.textContent = '有未保存修改';
       clearTimeout(autoSaveTimer);
-      autoSaveTimer = setTimeout(saveCard, 1200);
+      autoSaveTimer = setTimeout(saveCard, 3000);
     });
 
     // Cmd/Ctrl+S
@@ -854,7 +854,7 @@
     });
 
     // 加载已保存数据
-    loadCard();
+    try { loadCard(); } catch(e) { console.error('load failed:', e); }
   </script>
 
 </body>
