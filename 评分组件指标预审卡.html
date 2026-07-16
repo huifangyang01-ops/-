@@ -499,7 +499,7 @@
         <div class="cell verdict"><p class="cell-title">上线后填写</p><p>证实 / 部分证实 / 未证实；重点判断浮层类是否造成明显打扰。</p></div>
 
         <div class="cell plan"><p class="cell-title">假设 2：评分 + 原因能帮助定位体验问题</p><p>单题评分配合归因文本和必要上下文，足以发现设备、功能、场景或版本中的共性问题。</p></div>
-        <div class="cell data"><p class="cell-title">需要看</p><p>归因填写率、归因文本痛点聚类、文本反馈占比、设备型号 / 固件版本 / App 版本分布。</p></div>
+        <div class="cell data"><p class="cell-title">需要看</p><p>归因步骤流失率、归因文本痛点聚类、文本反馈占比、设备型号 / 固件版本 / App 版本分布。</p></div>
         <div class="cell verdict"><p class="cell-title">上线后填写</p><p>是否能输出可行动的问题线索，而不是只有泛化满意度。</p></div>
 
         <div class="cell plan"><p class="cell-title">假设 3：平台化配置能降低多设备接入成本</p><p>题型、题干、选项、展示形态、归因文案和频控由后台配置，业务侧仅负责触发场景和上下文接入。</p></div>
@@ -590,11 +590,11 @@
             </tr>
             <tr>
               <td><strong>辅助 2：反馈质量</strong></td>
-              <td>归因填写率</td>
-              <td>填写了归因文本的提交次数 ÷ 提交成功次数。</td>
-              <td>≥25%。</td>
+              <td>归因步骤流失率</td>
+              <td>弹出归因填写后用户未完成提交直接关闭的次数 ÷ 触发归因填写的次数。仅在后台配置了归因收集时适用。</td>
+              <td>≤20%。</td>
               <td>上线后填写。</td>
-              <td>判断归因文本是否能帮助定位问题，而不是只收集分数。</td>
+              <td>判断归因填写步骤是否造成用户放弃提交，衡量交互摩擦。</td>
             </tr>
             <tr>
               <td></td>
