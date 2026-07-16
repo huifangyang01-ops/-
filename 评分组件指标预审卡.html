@@ -447,6 +447,7 @@
           <button class="btn btn-secondary" id="exportBtn">导出 JSON</button>
           <button class="btn btn-secondary" id="printBtn">打印 / 导出 PDF</button>
           <button class="btn btn-danger" id="resetBtn">新建另一张</button>
+          <button class="btn btn-secondary" id="loadExistingBtn">打开上次保存</button>
         </div>
       </div>
     </div>
@@ -835,6 +836,10 @@
     });
     document.getElementById('addHypothesisBtn').addEventListener('click', () => addHypothesis({ plan: '<p class="cell-title">新增假设</p><p></p>', data: '<p class="cell-title">上线后数据</p><p></p>', verdict: '<p class="cell-title">结论</p><p></p>' }));
     document.getElementById('addMetricBtn').addEventListener('click', () => addMetricRow(['', '', '', '', '', '']));
+    document.getElementById('loadExistingBtn').addEventListener('click', () => {
+      if (!loadCard()) alert('当前浏览器里还没有保存过的指标卡。');
+    });
+
     document.getElementById('resetBtn').addEventListener('click', () => { if (confirm('确定要重置吗？当前内容如果没有保存会丢失。')) { localStorage.removeItem(STORAGE_KEY); location.reload(); } });
 
     // 自动保存
@@ -853,8 +858,8 @@
       }
     });
 
-    // 加载已保存数据
-    try { loadCard(); } catch(e) { console.error('load failed:', e); }
+    // 页面加载时不自动加载旧数据，避免结构不匹配导致崩溃
+    // 如需加载旧数据，点击"打开上次保存的卡片"按钮
   </script>
 
 </body>
