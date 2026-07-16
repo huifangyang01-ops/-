@@ -588,6 +588,7 @@
               <th>计算口径</th>
               <th>规划目标</th>
               <th>上线后数据</th>
+              <th>一句话结论</th>
               <th>备注 / 判断问题</th>
             </tr>
           </thead>
@@ -598,6 +599,7 @@
               <td contenteditable="true">提交成功且包含有效评分结果的次数 ÷ 评分组件有效曝光次数。</td>
               <td contenteditable="true">≥15%。用户行为 = 提交 + 关闭 + 忽略，三者之和约 100%。</td>
               <td contenteditable="true">上线后填写。</td>
+              <td contenteditable="true">上线后填写。</td>
               <td contenteditable="true">判断用户是否愿意完成轻量评分，是组件采集能力的核心。</td>
             </tr>
             <tr>
@@ -605,6 +607,7 @@
               <td contenteditable="true">关闭率</td>
               <td contenteditable="true">用户主动点击关闭按钮的次数 ÷ 有效曝光次数。</td>
               <td contenteditable="true">≤30%。</td>
+              <td contenteditable="true">上线后填写。</td>
               <td contenteditable="true">上线后填写。</td>
               <td contenteditable="true">用户明确拒绝，表示打扰感较强；浮窗和页面内置均适用。</td>
             </tr>
@@ -614,6 +617,7 @@
               <td contenteditable="true">曝光后用户未做任何操作（未提交、未点击关闭）的次数 ÷ 有效曝光次数。</td>
               <td contenteditable="true">≤55%。</td>
               <td contenteditable="true">上线后填写。</td>
+              <td contenteditable="true">上线后填写。</td>
               <td contenteditable="true">用户未注意到或选择无视，关闭率 + 忽略率 + 提交率 ≈ 100%。</td>
             </tr>
             <tr>
@@ -621,6 +625,7 @@
               <td contenteditable="true">归因步骤流失率</td>
               <td contenteditable="true">弹出归因填写后用户未完成提交直接关闭的次数 ÷ 触发归因填写的次数。仅在后台配置了归因收集时适用。</td>
               <td contenteditable="true">≤20%。</td>
+              <td contenteditable="true">上线后填写。</td>
               <td contenteditable="true">上线后填写。</td>
               <td contenteditable="true">判断归因填写步骤是否造成用户放弃提交，衡量交互摩擦。</td>
             </tr>
@@ -630,6 +635,7 @@
               <td contenteditable="true">对归因文本进行 AI 痛点聚类，提取高频词和痛点主题，按设备、场景、版本拆分。</td>
               <td contenteditable="true">非本版本，后续规划。</td>
               <td contenteditable="true">上线后填写。</td>
+              <td contenteditable="true">上线后填写。</td>
               <td contenteditable="true">用于判断低分是否集中指向连接稳定性、控制响应、状态反馈、功能查找等具体问题。</td>
             </tr>
             <tr>
@@ -638,6 +644,7 @@
               <td contenteditable="true">已接入评分组件能力的设备或业务数 ÷ 全部应接入评分的设备或业务数。只要接入了组件能力即计入，不要求最终发布评分任务。</td>
               <td contenteditable="true">≥70%。</td>
               <td contenteditable="true">上线后填写。</td>
+              <td contenteditable="true">上线后填写。</td>
               <td contenteditable="true"></td>
             </tr>
             <tr>
@@ -645,6 +652,7 @@
               <td contenteditable="true">新设备接入效率提升</td>
               <td contenteditable="true">新设备接入评分能力的平均工时，与未平台化接入方式对比。</td>
               <td contenteditable="true">≥50%。</td>
+              <td contenteditable="true">上线后填写。</td>
               <td contenteditable="true">上线后填写。</td>
               <td contenteditable="true"></td>
             </tr>
@@ -655,43 +663,10 @@
       <div class="table-note"><strong>关键前提：</strong>所有指标都必须绑定配置版本、设备类型、设备型号、固件版本、App 版本、触发页面、评分场景、展示形态和评分题型，否则上线后无法解释数据波动。</div>
     </section>
 
-    <section>
-      <div class="section-header">
-        <div>
-          <h2>六、埋点与数据记录预审</h2>
-          <p class="section-note">这里不是定义具体事件 ID，而是提前确认前端和后台必须能记录哪些事实，防止上线后无法计算指标。</p>
-        </div>
-        <span class="badge">数据</span>
-      </div>
-      <div class="two-col">
-        <div class="card">
-          <span class="label">前端埋点事件</span>
-          <h3>需要覆盖用户路径</h3>
-          <p><strong>邀评曝光：</strong>组件展示时上报，带设备类型、评分场景、评分题型、展示形态、配置版本。</p>
-          <p><strong>邀评关闭 / 忽略：</strong>用户关闭浮层、忽略或收起内嵌组件时上报，带关闭方式和停留时长。</p>
-          <p><strong>评分选择：</strong>用户选择评分项时上报，带评分值、量表样式。</p>
-          <p><strong>归因输入：</strong>用户在归因输入框输入文本时上报，带归因文本内容、字数。</p>
-          <p><strong>邀评提交：</strong>用户点击提交时上报，带提交结果、失败原因。</p>
-          <p><strong>作答完成：</strong>用户提交、关闭或忽略后聚合上报最终状态，便于计算完整漏斗。</p>
-        </div>
-        <div class="card">
-          <span class="label">后台记录与聚合</span>
-          <h3>需要支撑看板和频控判断</h3>
-          <p><strong>配置记录：</strong>配置 ID、配置版本、启停状态、发布人、发布时间、题型、展示形态、频控规则。</p>
-          <p><strong>设备上下文：</strong>设备类型、设备型号、设备 ID、固件版本、设备在线状态。</p>
-          <p><strong>业务上下文：</strong>触发页面、触发来源、事件类型、评分对象、有效任务 ID 或业务记录 ID。</p>
-          <p><strong>评分结果：</strong>分数、选项、归因文本、提交时间、提交结果。</p>
-          <p><strong>拒绝原因：</strong>频控、关闭冷却、提交冷却、高专注页面、设备异常、配置失效等。</p>
-          <p><strong>隐私限制：</strong>不记录 BBM 视频画面、音频内容、宝宝影像；吸奶器仅记录评分分析所需字段。</p>
-        </div>
-      </div>
-            <div class="table-note">待确认项：具体事件 ID、枚举值、页面名称映射、低分阈值配置、曝光可见阈值、关闭与忽略的判定窗口、各设备首批接入场景清单。</div>
-    </section>
-
     <section class="footer-summary">
       <div class="section-header">
         <div>
-          <h2>七、总括：这张卡的真正作用</h2>
+          <h2>六、总括：这张卡的真正作用</h2>
           <p class="section-note editable" contenteditable="true" data-key="finalSummaryNote">这张卡的重点不是替 PRD 写实现方案，而是在评审前沉淀“为什么做、怎么算成功、上线后如何验证”的共识。</p>
         </div>
         <span class="badge" style="background:rgba(255,255,255,.16); color:#fff;">总括</span>
